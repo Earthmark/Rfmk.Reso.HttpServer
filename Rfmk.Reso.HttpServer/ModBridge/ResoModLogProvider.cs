@@ -2,10 +2,10 @@
 
 namespace Rfmk.Reso.HttpServer.ModBridge;
 
-public class ResoLogProvider : ILoggerProvider
+public class ResoModLogProvider : ILoggerProvider
 {
     public ILogger CreateLogger(string categoryName)
-        => new ResoLogger(categoryName);
+        => new ResoModLogger(categoryName);
 
     public void Dispose()
     {

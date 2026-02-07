@@ -1,14 +1,11 @@
-﻿using GenHTTP.Api.Content;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Rfmk.Reso.HttpServer;
-using Rfmk.Reso.HttpServer.Host;
+using Rfmk.Reso.HttpServer.Plugins;
 
 //
 // GenHTTP Controller Framework Template
 //
 // URLs:
-//   http://localhost:8080/devices/
 //   http://localhost:8080/docs/
 //   http://localhost:8080/openapi.json
 //
@@ -24,8 +21,10 @@ using Rfmk.Reso.HttpServer.Host;
 
 var builder = Host.CreateApplicationBuilder();
 
-builder.Services.AddHttpHost();
-builder.Services.AddSingleton<IHandlerBuilder>(_ => Project.Setup());
+builder.Services.AddGenHttpHost();
+builder.Services.AddPlugins();
+
+builder.Services.AddTransient<IHttpPlugin, TestPlugin>();
 
 var app = builder.Build();
 

@@ -2,7 +2,7 @@
 
 namespace Rfmk.Reso.HttpServer.Host;
 
-public class HttpOptions
+public class GenHttpOptions
 {
     public List<HttpEndpoint> Endpoints { get; set; } = [];
 }
@@ -10,8 +10,8 @@ public class HttpOptions
 public class HttpEndpoint
 {
     public IPAddress? Address { get; set; }
-    
+
     public ushort Port { get; set; }
-    
+
     public bool DualStack { get; set; } = true;
 }

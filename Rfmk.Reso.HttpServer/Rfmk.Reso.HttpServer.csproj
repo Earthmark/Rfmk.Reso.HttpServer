@@ -12,17 +12,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-
         <PackageReference Include="GenHTTP.Core" Version="10.3.0"/>
-
         <PackageReference Include="GenHTTP.Modules.DependencyInjection" Version="10.3.0" />
-
+        <PackageReference Include="GenHTTP.Modules.Inspection" Version="10.4.2" />
+        <PackageReference Include="GenHTTP.Modules.Pages" Version="10.4.2" />
         <PackageReference Include="GenHTTP.Modules.Security" Version="10.3.0"/>
         <PackageReference Include="GenHTTP.Modules.Controllers" Version="10.3.0"/>
         <PackageReference Include="GenHTTP.Modules.OpenApi" Version="10.3.0"/>
         <PackageReference Include="GenHTTP.Modules.ApiBrowsing" Version="10.3.0"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
-
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.12" />
     </ItemGroup>
 
     <ItemGroup>
@@ -64,9 +62,17 @@
         </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Pages\Index.html" />
+      <EmbeddedResource Include="Pages\Index.html" />
+    </ItemGroup>
+
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(CopyToMods)'=='true'">
+        <ItemGroup>
+            <ModOutputFiles Include="$(TargetDir)**\*.*" />
+        </ItemGroup>
         <Message Text="Attempting to copy $(TargetFileName) to $(ResonitePath)rml_mods" Importance="high" />
-        <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ResonitePath)rml_mods" ContinueOnError="true" />
+        <Copy SourceFiles="@(ModOutputFiles)" DestinationFolder="$(ResonitePath)rml_mods\%(RecursiveDir)" ContinueOnError="true" />
     </Target>
 
 </Project>
