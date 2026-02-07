@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Rfmk.Reso.HttpServer.Tests/Rfmk.Reso.HttpServer.Tests.csproj" />
+  <Project Path="Rfmk.Reso.HttpServer/Rfmk.Reso.HttpServer.csproj" />
+</Solution>
