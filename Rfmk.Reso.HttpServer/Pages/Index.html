@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Resonite Instance</title>
+</head>
+<body>
+
+<table>
+    <thead>
+        <tr>
+            <th>Plugins</th>
+        </tr>
+    </thead>
+    <tbody>
+        {for name, route in plugins:
+        <tr>
+            <td><a href="/{route}">{name}</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+</body>
+</html>
