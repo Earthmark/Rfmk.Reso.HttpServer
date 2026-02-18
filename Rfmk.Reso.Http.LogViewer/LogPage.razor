@@ -1,0 +1,26 @@
+﻿@page "/log"
+
+<div class="my-component">
+    This component is defined in the <strong>Rfmk.Reso.Http.LogViewer</strong> library.
+</div>
+
+<script>
+  const socket = new WebSocket("/api/log");
+  
+  socket.addEventListener("open", () => {
+    console.log("WebSocket connection opened");
+  });
+  
+  socket.addEventListener("message", (event) => {
+    console.log("Message from server ", event.data);
+  });
+  
+  socket.addEventListener("close", () => {
+    console.log("WebSocket connection closed");
+  });
+  
+  socket.addEventListener("error", (error) => {
+    console.error("WebSocket error observed:", error);
+  });
+</script>
+

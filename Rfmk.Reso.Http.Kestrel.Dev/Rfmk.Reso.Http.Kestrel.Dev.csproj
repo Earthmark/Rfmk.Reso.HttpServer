@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(ResonitePath)'==''">
+        <!-- If you don't want to provide a ResonitePath in dotnet build, you can specify one here -->
+        <ResonitePath>$(MSBuildThisFileDirectory)Resonite/</ResonitePath>
+        <ResonitePath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Resonite\')">C:\Program Files (x86)\Steam\steamapps\common\Resonite\</ResonitePath>
+        <ResonitePath Condition="Exists('$(HOME)/.steam/steam/steamapps/common/Resonite/')">$(HOME)/.steam/steam/steamapps/common/Resonite/</ResonitePath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Rfmk.Reso.Http.Kestrel\Rfmk.Reso.Http.Kestrel.csproj" />
+      <ProjectReference Include="..\Rfmk.Reso.Http.LinkProxy\Rfmk.Reso.Http.LinkProxy.csproj" />
+      <ProjectReference Include="..\Rfmk.Reso.Http.LogViewer\Rfmk.Reso.Http.LogViewer.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="ResoniteModLoader">
+            <HintPath>$(ResonitePath)Libraries\ResoniteModLoader.dll</HintPath>
+        </Reference>
+        <Reference Include="HarmonyLib">
+            <HintPath>$(ResonitePath)rml_libs\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="FrooxEngine">
+            <HintPath>$(ResonitePath)FrooxEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="ResoniteLink">
+            <HintPath>$(ResonitePath)ResoniteLink.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+</Project>

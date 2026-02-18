@@ -1,0 +1,6 @@
+@Rfmk.Reso.Http.Kestrel.Dev_HostAddress = http://localhost:5185
+
+GET {{Rfmk.Reso.Http.Kestrel.Dev_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

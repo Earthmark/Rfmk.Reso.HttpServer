@@ -1,0 +1,8 @@
+﻿@inject IEnumerable<IResoHttpModule> ResoHttpModules
+
+<Router AppAssembly="typeof(KestrelBuilder).Assembly" AdditionalAssemblies="ResoHttpModules.Select(mod => mod.GetType().Assembly)" NotFoundPage="typeof(Pages.NotFound)">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)"/>
+        <FocusOnNavigate RouteData="routeData" Selector="h1"/>
+    </Found>
+</Router>

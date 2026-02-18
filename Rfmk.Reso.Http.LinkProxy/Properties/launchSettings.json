@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Rfmk.Reso.Http.LinkProxy": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:53318;http://localhost:53320"
+    }
+  }
+}

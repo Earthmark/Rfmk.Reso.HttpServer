@@ -1,4 +1,7 @@
 <Solution>
-  <Project Path="Rfmk.Reso.HttpServer.Tests/Rfmk.Reso.HttpServer.Tests.csproj" />
-  <Project Path="Rfmk.Reso.HttpServer/Rfmk.Reso.HttpServer.csproj" />
+  <Project Path="Rfmk.Reso.Http.Kestrel.Dev/Rfmk.Reso.Http.Kestrel.Dev.csproj" />
+  <Project Path="Rfmk.Reso.Http.Kestrel/Rfmk.Reso.Http.Kestrel.csproj" />
+  <Project Path="Rfmk.Reso.Http.LinkProxy/Rfmk.Reso.Http.LinkProxy.csproj" />
+  <Project Path="Rfmk.Reso.Http.LogViewer/Rfmk.Reso.Http.LogViewer.csproj" />
+  <Project Path="Rfmk.Reso.Http/Rfmk.Reso.Http.csproj" />
 </Solution>
