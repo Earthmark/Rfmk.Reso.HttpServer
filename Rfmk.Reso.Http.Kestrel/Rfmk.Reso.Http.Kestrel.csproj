@@ -5,10 +5,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+        <OutputType>Library</OutputType>
         
         <CopyToMods Condition="'$(CopyToMods)'==''">true</CopyToMods>
-        
-        <OutputType>Library</OutputType>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(ResonitePath)'==''">
@@ -19,6 +18,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Rfmk.Reso.Http.LogViewer\Rfmk.Reso.Http.LogViewer.csproj" />
       <ProjectReference Include="..\Rfmk.Reso.Http\Rfmk.Reso.Http.csproj" />
     </ItemGroup>
 

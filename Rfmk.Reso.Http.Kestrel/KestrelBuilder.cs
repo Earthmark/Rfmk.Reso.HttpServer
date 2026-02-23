@@ -12,7 +12,6 @@ public class KestrelBuilder
         var builder = WebApplication.CreateBuilder(embedded
             ? new WebApplicationOptions
             {
-                WebRootPath = "http_wwwroot",
                 ContentRootPath = "rml_mods",
                 EnvironmentName = "Development",
                 Args = Environment.GetCommandLineArgs(),
@@ -28,6 +27,8 @@ public class KestrelBuilder
             builder.Services.AddResoniteContext();
         }
 
+        builder.Services.AddSignalR();
+        
         builder.Services.AddWebSockets(o => o.KeepAliveInterval = TimeSpan.FromSeconds(120));
 
         var assemblies = injectors.Select(i => i.GetType().Assembly).Distinct().ToArray();
@@ -43,10 +44,16 @@ public class KestrelBuilder
         foreach (var module in injectors)
         {
             builder.Services.AddSingleton(module);
+            if (module is ISubPageHttpModule pageMod)
+            {
+                builder.Services.AddSingleton(pageMod);
+            }
+            
             module.AddToBuilder(builder);
         }
 
         var app = builder.Build();
+
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
@@ -57,20 +64,22 @@ public class KestrelBuilder
         app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 
         app.UseAntiforgery();
-
-        app.MapStaticResoAssets<App>();
-
+        
         app.UseWebSockets();
-        app.MapControllers();
-
-        app.MapRazorComponents<App>().AddAdditionalAssemblies(assemblies)
-            .AddInteractiveServerRenderMode();
-
+        
+        app.MapStaticResoAssets<App>();
+        
         foreach (var module in injectors)
         {
             module.UseInApp(app);
         }
+        
+        app.MapRazorComponents<App>()
+            .AddAdditionalAssemblies(assemblies)
+            .AddInteractiveServerRenderMode();
 
+        app.MapControllers();
+        
         return app;
     }
 }

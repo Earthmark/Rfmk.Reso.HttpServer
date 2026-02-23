@@ -1,9 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <OutputType>Library</OutputType>
         
         <CopyToMods Condition="'$(CopyToMods)'==''">true</CopyToMods>
     </PropertyGroup>
@@ -20,8 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.2" />
-        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.3" />
+        <ProjectReference Include="..\Rfmk.Reso.Http\Rfmk.Reso.Http.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -41,19 +41,6 @@
             <HintPath>$(ResonitePath)rml_libs\0Harmony.dll</HintPath>
             <Private>False</Private>
         </Reference>
-    </ItemGroup>
-    
-    <ItemGroup>
-      <ProjectReference Include="..\Rfmk.Reso.Http\Rfmk.Reso.Http.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="wwwroot\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\lib\microsoft\signalr\dist\browser\signalr.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\microsoft\signalr\dist\browser\signalr.min.js" />
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(CopyToMods)'=='true'">

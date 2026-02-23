@@ -10,6 +10,23 @@ public interface IUniLogListener
     IAsyncEnumerable<UniLogMessage> WatchLogs(CancellationToken cancellationToken);
 }
 
+public class MockUniLogListener : IUniLogListener
+{
+    public async IAsyncEnumerable<UniLogMessage> WatchLogs([EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        while (true)
+        {
+            await Task.Delay(1000, cancellationToken);
+            yield return new UniLogMessage("Mock log message", UniLogSeverity.Info);
+            await Task.Delay(1000, cancellationToken);
+            yield return new UniLogMessage("Mock Warning", UniLogSeverity.Warning);
+            await Task.Delay(1000, cancellationToken);
+            yield return new UniLogMessage("Mock Error Message", UniLogSeverity.Error);
+        }
+        // ReSharper disable once IteratorNeverReturns
+    }
+}
+
 public class UniLogListener : IUniLogListener
 {
     private static readonly ConcurrentDictionary<Guid, Channel<UniLogMessage>> LogSubjects = new();
@@ -48,10 +65,7 @@ public class UniLogListener : IUniLogListener
     }
 }
 
-public record UniLogMessage(string Message, UniLogSeverity Severity)
-{
-    public override string ToString() => $"{Severity}: {Message}";
-}
+public record UniLogMessage(string Message, UniLogSeverity Severity);
 
 public enum UniLogSeverity
 {

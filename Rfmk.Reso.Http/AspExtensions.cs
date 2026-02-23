@@ -1,6 +1,9 @@
 ﻿namespace Rfmk.Reso.Http;
 
-public static class EndpointRouteBuilderExtensions
+/// <summary>
+/// Extensions for ASP.NET types, such as route builders or other web-framework dependent types.
+/// </summary>
+public static class AspExtensions
 {
     /// <summary>
     /// Maps static assets from assemblies in the rml_mods folder.
@@ -11,6 +14,9 @@ public static class EndpointRouteBuilderExtensions
     public static void MapStaticResoAssets<T>(this WebApplication app)
     {
         var assemName = typeof(T).Assembly.GetName();
-        app.MapStaticAssets($"rml_mods/{assemName.Name}.staticwebassets.endpoints.json");
+        
+        var prefix = app.Services.IsResoniteHosted() ? "rml_mods/" : "";
+        
+        app.MapStaticAssets($"{prefix}{assemName.Name}.staticwebassets.endpoints.json");
     }
 }

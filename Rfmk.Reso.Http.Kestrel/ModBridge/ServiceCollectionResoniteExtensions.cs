@@ -1,4 +1,5 @@
 ﻿using FrooxEngine;
+using Rfmk.Reso.Http;
 using Rfmk.Reso.Http.Kestrel.ModBridge;
 
 // ReSharper disable once CheckNamespace
@@ -11,6 +12,7 @@ public static class ServiceCollectionResoniteExtensions
     /// </summary>
     public static IServiceCollection AddResoniteContext(this IServiceCollection services)
     {
+        services.AddSingleton<ResoniteMarker>();
         services.AddSingleton<ILoggerProvider, ResoModLogProvider>();
         services.AddSingleton(Engine.Current);
         return services;
